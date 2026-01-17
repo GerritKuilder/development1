@@ -378,3 +378,5 @@ git diff path/to/file.js
 4. **Use branches**: Keep main stable, develop features in branches
 5. **Review changes**: Use `git diff` before committing
 6. **Never commit secrets**: `.env` files are gitignored for this reason
+
+# further notes to follow
