@@ -224,4 +224,157 @@ console.log(process.env.APP);                 // From projecOne/.env
 ### Redis Connection Failing:
 1. Check `REDIS_STREAM_HOST` and `REDIS_DATA_HOST` in `development1/.env`
 2. Verify Redis server is running: `redis-cli -h <host> -p <port> ping`
-3. Check network connectivity and firewall rules 
+3. Check network connectivity and firewall rules
+
+## Git & GitLab Integration
+
+### Initial Repository Setup (Already Completed)
+
+This project is already initialized as a git repository with best practices:
+- User configured: `gerrit.kuilder@gmail.com`
+- Branch: `main` (modern convention)
+- Initial commit created
+- `.gitignore` configured
+
+### Pushing to GitLab (gitlab.loener.nl)
+
+#### First-time Setup for New Project:
+
+1. **Create a new project on GitLab**:
+   - Go to https://gitlab.loener.nl
+   - Click "New Project" → "Create blank project"
+   - Enter project name (e.g., "development1")
+   - Choose visibility level (Private/Internal/Public)
+   - **Do NOT** initialize with README (already exists)
+   - Click "Create project"
+
+2. **Connect local repository to GitLab**:
+   ```bash
+   cd /home/gerrit/workspace/code/development1
+   git remote add origin git@gitlab.loener.nl:your-username/your-project-name.git
+   git push -u origin main
+   ```
+
+3. **Verify connection**:
+   ```bash
+   git remote -v
+   ```
+
+#### Daily Git Workflow:
+
+**Check status**:
+```bash
+git status
+```
+
+**Stage changes**:
+```bash
+# Stage specific files
+git add path/to/file.js
+
+# Stage all changes
+git add .
+
+# Stage all modified files (not new files)
+git add -u
+```
+
+**Commit changes**:
+```bash
+# With message
+git commit -m "Description of changes"
+
+# With detailed message (opens editor)
+git commit
+```
+
+**Push to GitLab**:
+```bash
+# Push to main branch
+git push
+
+# Push and set upstream
+git push -u origin main
+```
+
+**Pull latest changes**:
+```bash
+git pull
+```
+
+**View commit history**:
+```bash
+git log --oneline
+git log --graph --oneline --all
+```
+
+#### Using GitLab VS Code Extension:
+
+If you have the GitLab extension installed:
+- View changes in the Source Control panel (Ctrl+Shift+G)
+- Stage files by clicking the + icon
+- Write commit message in the text box
+- Click ✓ to commit
+- Click "..." → "Push" to push to GitLab
+- Create merge requests directly from VS Code
+
+#### Branch Strategy:
+
+**Create feature branch**:
+```bash
+git checkout -b feature/new-feature
+```
+
+**Switch branches**:
+```bash
+git checkout main
+git checkout feature/new-feature
+```
+
+**Merge feature into main**:
+```bash
+git checkout main
+git merge feature/new-feature
+```
+
+**Push branch to GitLab**:
+```bash
+git push -u origin feature/new-feature
+```
+
+#### Common Git Commands:
+
+**Undo uncommitted changes**:
+```bash
+# Discard changes to specific file
+git checkout -- path/to/file.js
+
+# Discard all changes
+git reset --hard HEAD
+```
+
+**Amend last commit**:
+```bash
+git commit --amend -m "Updated commit message"
+```
+
+**View differences**:
+```bash
+# Changes not yet staged
+git diff
+
+# Changes staged for commit
+git diff --cached
+
+# Changes in specific file
+git diff path/to/file.js
+```
+
+### Best Practices:
+
+1. **Commit often**: Small, focused commits are easier to review and revert
+2. **Write clear commit messages**: Describe *what* and *why*, not *how*
+3. **Pull before push**: Always get latest changes before pushing
+4. **Use branches**: Keep main stable, develop features in branches
+5. **Review changes**: Use `git diff` before committing
+6. **Never commit secrets**: `.env` files are gitignored for this reason
